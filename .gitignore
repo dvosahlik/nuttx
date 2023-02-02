@@ -30,10 +30,6 @@
 *.su
 *~
 .depend
-/.config
-/.config.*
-/.config-*
-/.config\ *
 /.cproject
 /.gdbinit
 /.project
