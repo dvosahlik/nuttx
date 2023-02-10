@@ -493,6 +493,7 @@ static void tivacan_receive_work(void *priv)
         }
 #endif /* CONFIG_NET_CAN_ERRORS */
     }
+  lpwork_restorepriority(CONFIG_SCHED_LPWORKPRIORITY);
 }
 
 #ifdef CONFIG_NETDEV_IOCTL
@@ -1153,6 +1154,7 @@ static int  tivacan_isr(int irq, void *context, void *dev)
                   canmod->rx_work_repeat = 1;
                   if (work_available(&canmod->rxwork))
                     {
+                      lpwork_boostpriority(CONFIG_SCHED_LPWORKPRIOMAX);
                       work_queue(CANWORK,
                                  &canmod->rxwork,
                                  tivacan_receive_work,
